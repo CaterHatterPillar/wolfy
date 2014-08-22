@@ -6,3 +6,6 @@ from random import randint
 # rolling a ten-sided die.
 def castD10():
     return randint(0, 9)
+
+def getVersionNumber():
+    return str(0.1)

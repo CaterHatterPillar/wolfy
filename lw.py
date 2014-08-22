@@ -52,17 +52,18 @@ if(os.path.isfile(filename)):
 file = open(filename, 'w')
 
 if combat_skill==None:
-    combat_skill = str(util.castD10() + 10)
+    combat_skill = str(wolfy_util.castD10() + 10)
     print('Character COMBAT SKILL not given.'
            'COMBAT SKILL is randomized to: ' + combat_skill)
 if endurance==None:
-    endurance = str(util.castD10() + 20)
+    endurance = str(wolfy_util.castD10() + 20)
     print("Character ENDURANCE not given. ENDURANCE is randomized to: "
            + endurance)
 
 file.write('# ' + filename + '\n'
            '# wolfy character file for Joe Dever\'s Lone Wolf series.\n'
-           '# See https://github.com/CaterHatterPillar/wolfy\n#\n'
+           '# See https://github.com/CaterHatterPillar/wolfy\n'
+           '# v. ' + wolfy_util.getVersionNumber() + '\n'
            '# Character: ' + name + '\n')
 print('Created character ' + name + ' with filename ' + filename + '.')
 

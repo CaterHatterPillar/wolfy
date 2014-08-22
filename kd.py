@@ -7,6 +7,8 @@ import sys
 import operator
 import argparse
 
+import wolfy_config
+
 # These may change as the player progresses throughout the books, but
 # should do for the first five:
 Kai_Disciplines = ['camouflage', 'hunting', 'sixth sense', 'tracking',
@@ -41,4 +43,4 @@ if skill=='weaponskill' and type==None:
                     + str(sorted(Weapon_Skills.iteritems(),
                                  key = operator.itemgetter(1))))
 
-# Parse config to get active char.
+config = wolfy_config.getConfig()
