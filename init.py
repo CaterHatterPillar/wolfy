@@ -17,7 +17,7 @@ if(os.path.isfile(wolfile)):
 else:
     file = open(wolfile, 'w')
     file.write('# .wolfy\n'
-               '# wolfy configuration file for Joe Dever's Lone Wolf series.\n'
+               '# wolfy configuration file for Joe Dever\'s Lone Wolf series.\n'
                '# See https://github.com/CaterHatterPillar/wolfy\n#\n'
                '\nACTIVE_CHAR NA\n')
 

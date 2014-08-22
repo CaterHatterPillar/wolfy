@@ -17,7 +17,7 @@ import os
 import sys
 import argparse
 
-import util
+import wolfy_util
 
 argparser = argparse.ArgumentParser(prog='lw', description=
                                     'Create a new wolfy character. The COMBAT'
@@ -61,7 +61,7 @@ if endurance==None:
            + endurance)
 
 file.write('# ' + filename + '\n'
-           '# wolfy character file for Joe Dever's Lone Wolf series.\n'
+           '# wolfy character file for Joe Dever\'s Lone Wolf series.\n'
            '# See https://github.com/CaterHatterPillar/wolfy\n#\n'
            '# Character: ' + name + '\n')
 print('Created character ' + name + ' with filename ' + filename + '.')
