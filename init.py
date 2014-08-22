@@ -3,17 +3,23 @@
 # Initialize a wolfy working directory.
 
 import os
+import sys
+import argparse
+
+argparser = argparse.ArgumentParser(prog='init', description=
+                                    'Initialize a wolfy repository.')
+args = argparser.parse_args(sys.argv[1:])
 
 workDir = os.path.dirname(os.path.realpath(__file__))
-wolfile = workDir + "/.wolfy"
+wolfile = workDir + '/.wolfy'
 if(os.path.isfile(wolfile)):
-    print("wolfy working directory already initialized in: " + workdir)
+    print('wolfy working directory already initialized in: ' + workdir)
 else:
     file = open(wolfile, 'w')
-    file.write("# " + ".wolfy\n"
-               "# wolfy configuration file for Joe Dever's Lone Wolf series.\n"
-               "# See https://github.com/CaterHatterPillar/wolfy\n#\n"
-               "\nACTIVE_CHAR NA\n")
+    file.write('# .wolfy\n'
+               '# wolfy configuration file for Joe Dever's Lone Wolf series.\n'
+               '# See https://github.com/CaterHatterPillar/wolfy\n#\n'
+               '\nACTIVE_CHAR NA\n')
 
-    print("Created wolfy working directory in " + workDir +
-          ". Configure " + wolfile + " to modify wolfy behaviour.")
+    print('Created wolfy working directory in ' + workDir + '.\n'
+          'Configure ' + wolfile + ' to modify wolfy behaviour.')

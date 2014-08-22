@@ -15,74 +15,55 @@
 
 import os
 import sys
-import getopt
+import argparse
 
 import util
 
-def print_help():
-    print("Usage: " + sys.argv[0] + 
-              " -n [--name] CHARACTER_NAME"
-              " -cs [--combatskill] COMBAT_SKILL"
-              " -en [--endurance] ENDURANCE")
+argparser = argparse.ArgumentParser(prog='lw', description=
+                                    'Create a new wolfy character. The COMBAT'
+                                    ' SKILL and ENDURANCE options may be'
+                                    ' utilized if the user prefers randomizing'
+                                    ' his/her numbers using the original'
+                                    ' Random Number Tables.')
+argparser.add_argument('name', type = str, help =
+                       'Desired character name. This'
+                       ' will primarily act as the name of your character file'
+                       ' which you may, in turn, version control.')
+argparser.add_argument('-cs', '--combatskill', type = int, help =
+                       'Your initial COMBAT SKILL. If this option is not'
+                       ' specified, your initial COMBAT SKILL will be'
+                       ' randomized for you.')
+argparser.add_argument('-en', '--endurance', type = int, help =
+                       'Your initial ENDURANCE. If this option is not given,'
+                       ' your initial ENDURANCE will be automatically'
+                       ' randomized.')
+args = argparser.parse_args(sys.argv[1:])
 
-# Entry point:
-try:
-    opts, args = getopt.getopt(sys.argv[1:], 'n:cs:en:h', 
-                                ['name=', 'combatskill=', 
-                                 'endurance=', 'help='])
-    if not opts:
-        print("No arguments given!")
-        print_help()
-        sys.exit(1)
-except getopt.GetoptError as e:
-    print(e)
-    sys.exit(2)
+name = args.name
+combat_skill = args.combatskill
+endurance = args.endurance
 
-for opt, arg in opts:
-    if opt in ('-h', '--help'):
-        print_help()
-    elif opt in ('-n', '--name'):
-        name = arg
-    elif opt in ('-cs', '--combatskill'):
-        combat_skill = arg
-    elif opt in ('-en', '--endurance'):
-        endurance = arg
-    else:
-        print_help()
-        sys_exit(1)
-
-try:
-    name
-except NameError:
-    print("Argument -n [--name] NAME must be given!")
-    print_help()
-    sys_exit(1)
-filename = name.lower() + ".lw"
-
+filename = name.lower() + '.lw'
 if(os.path.isfile(filename)):
-    print("There already exists a character with that name! Please remove " 
-          + filename + " or give a different character name.")
+    argparser.error('There already exists a character with that name!'
+                    ' Please remove ' + filename + ' or give a different'
+                    ' character name.')
     sys.exit(3)
 file = open(filename, 'w')
 
-try:
-    combat_skill
-except NameError:
+if combat_skill==None:
     combat_skill = str(util.castD10() + 10)
-    print("Character COMBAT SKILL not given."
-           "COMBAT SKILL is randomized to: " + combat_skill)
-
-try:
-    endurance
-except NameError:
+    print('Character COMBAT SKILL not given.'
+           'COMBAT SKILL is randomized to: ' + combat_skill)
+if endurance==None:
     endurance = str(util.castD10() + 20)
     print("Character ENDURANCE not given. ENDURANCE is randomized to: "
            + endurance)
 
-file.write("# " + filename + "\n"
-           "# wolfy character file for Joe Dever's Lone Wolf series.\n"
-           "# See https://github.com/CaterHatterPillar/wolfy\n#\n"
-           "# Character: " + name + "\n")
-print("Created character " + name + " with filename " + filename + ".")
+file.write('# ' + filename + '\n'
+           '# wolfy character file for Joe Dever's Lone Wolf series.\n'
+           '# See https://github.com/CaterHatterPillar/wolfy\n#\n'
+           '# Character: ' + name + '\n')
+print('Created character ' + name + ' with filename ' + filename + '.')
 
 file.close()
