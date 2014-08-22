@@ -18,6 +18,7 @@ import sys
 import argparse
 
 import wolfy_util
+import wolfy_config
 
 argparser = argparse.ArgumentParser(prog='lw', description=
                                     'Create a new wolfy character. The COMBAT'
@@ -37,11 +38,15 @@ argparser.add_argument('-en', '--endurance', type = int, help =
                        'Your initial ENDURANCE. If this option is not given,'
                        ' your initial ENDURANCE will be automatically'
                        ' randomized.')
+argparser.add_argument('-ac', '--active', action='store_true', help = 
+                       'Whather or not to set the newly created character as'
+                       ' active in the wolfy repository configuration.')
 args = argparser.parse_args(sys.argv[1:])
 
 name = args.name
 combat_skill = args.combatskill
 endurance = args.endurance
+set_as_active = args.active
 
 filename = name.lower() + '.lw'
 if(os.path.isfile(filename)):
@@ -57,7 +62,7 @@ if combat_skill==None:
            'COMBAT SKILL is randomized to: ' + combat_skill)
 if endurance==None:
     endurance = str(wolfy_util.castD10() + 20)
-    print("Character ENDURANCE not given. ENDURANCE is randomized to: "
+    print('Character ENDURANCE not given. ENDURANCE is randomized to: '
            + endurance)
 
 file.write('# ' + filename + '\n'
@@ -66,5 +71,10 @@ file.write('# ' + filename + '\n'
            '# v. ' + wolfy_util.getVersionNumber() + '\n'
            '# Character: ' + name + '\n')
 print('Created character ' + name + ' with filename ' + filename + '.')
+
+if set_as_active:
+    wolfy_config.setActiveChar(name)
+    print('Set ' + name + ' as the active Lone Wolf character in the wolfy'
+          ' repository configuration.')
 
 file.close()

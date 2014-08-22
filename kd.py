@@ -7,6 +7,7 @@ import sys
 import operator
 import argparse
 
+import wolfy_char
 import wolfy_config
 
 # These may change as the player progresses throughout the books, but
@@ -44,3 +45,4 @@ if skill=='weaponskill' and type==None:
                                  key = operator.itemgetter(1))))
 
 config = wolfy_config.getConfig()
+char = wolfy_char.getChar(config.active_char)
