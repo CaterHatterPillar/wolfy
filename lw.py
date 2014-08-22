@@ -2,12 +2,6 @@
 # lw.py
 # Create a Lone Wolf character.
 
-# Arguments:
-# * Name: Character- and filename of instantiated character.
-# * Combat Skill: Rolled COMBAT SKILL of character.
-# * Endurance: Rolled ENDURANCE of character.
-# (Don't specify Combat Skill or Endurance arguments if you wish them randomizd)
-
 # System errors:
 # 1 - Erronous arguments given.
 # 2 - Command line syntax error.
